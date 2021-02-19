@@ -1,5 +1,10 @@
 package com.nagarro.serviceReceiver.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class ServiceReceiver {
 	String firstName;
 	String lastName;
