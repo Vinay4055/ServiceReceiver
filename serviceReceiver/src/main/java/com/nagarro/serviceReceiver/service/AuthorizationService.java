@@ -4,5 +4,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface AuthorizationService {
-	public void validateAccount(String email,String password);
+	public Boolean validateAccount(String email,String password);
 }

@@ -1,5 +1,7 @@
 package com.nagarro.serviceReceiver.controller;
 
+import javax.validation.Valid;
+
 //import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,20 +28,20 @@ public class ServiceRequestController {
 	//@Autowired
 	MaintainServiceRequest maintainServiceRequest;
 	@PostMapping("/")
-	public ResponseEntity<String> createServiceRequest(@PathVariable("email") String email,@RequestBody ServiceRequest serviceRequest, BindingResult bindingResult) {
+	public ResponseEntity<String> createServiceRequest(@RequestBody @Valid ServiceRequest serviceRequest, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
 			return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
 		} else {
-			String orderId = maintainServiceRequest.bookService(serviceRequest,email);
+			String orderId = maintainServiceRequest.bookService(serviceRequest);
 			return	new ResponseEntity<>(orderId,HttpStatus.ACCEPTED);
 		}
 	}
 	@DeleteMapping("/")
-	public ResponseEntity<Void> deleteServiceRequest(@PathVariable("email") String email, @RequestBody ServiceRequest serviceRequest, BindingResult bindingResult){
+	public ResponseEntity<Void> deleteServiceRequest(@RequestBody @Valid ServiceRequest serviceRequest, BindingResult bindingResult){
 		if (bindingResult.hasErrors()) {
 			return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
 		} else {
-			maintainServiceRequest.cancelService(serviceRequest,email);
+			maintainServiceRequest.cancelService(serviceRequest);
 			return	new ResponseEntity<>(HttpStatus.ACCEPTED);
 		}
 	}

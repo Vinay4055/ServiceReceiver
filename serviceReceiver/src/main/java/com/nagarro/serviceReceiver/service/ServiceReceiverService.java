@@ -1,5 +1,7 @@
 package com.nagarro.serviceReceiver.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.nagarro.serviceReceiver.entity.ServiceReceiver;
@@ -9,4 +11,5 @@ public interface ServiceReceiverService {
 	public Boolean updateAccount(ServiceReceiver serviceReceiver);
 	public Boolean deleteAccount(ServiceReceiver serviceReceiver);
 	public ServiceReceiver findAccount(String email);
+	public List<ServiceReceiver> getAllAccounts();
 }

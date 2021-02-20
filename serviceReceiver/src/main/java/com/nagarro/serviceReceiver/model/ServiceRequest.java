@@ -11,4 +11,6 @@ public class ServiceRequest {
 	Date date;
 	@NotEmpty(message = "Status is Mandatory")
 	String status;
+	@NotEmpty(message = "Please Enter The email id of user which requested for the service")
+	String requestMadeBy;
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.nagarro.serviceReceiver.entity.ServiceReceiver;
 import com.nagarro.serviceReceiver.service.ServiceReceiverService;
+
 @Service
 public class ServiceReceiverServiceImpl implements ServiceReceiverService {
 
@@ -45,22 +46,29 @@ public class ServiceReceiverServiceImpl implements ServiceReceiverService {
 	@Override
 	public Boolean deleteAccount(ServiceReceiver serviceReceiver) {
 		ServiceReceiver existingRecord = this.findAccount(serviceReceiver.getEmail());
-		if(existingRecord != null) {
+		if (existingRecord != null) {
 			serviceReceivers.remove(existingRecord);
 			return true;
-		}
-		else
+		} else
 			return false;
 	}
 
 	@Override
 	public ServiceReceiver findAccount(String email) {
+
 		Optional<ServiceReceiver> foundedServiceReceiver = serviceReceivers.stream()
-				.filter(serviceReceiver -> email.equals(serviceReceiver.getEmail())).findFirst();
-		if (foundedServiceReceiver.isPresent()) {
+				.filter(serviceReceiver -> serviceReceiver.getEmail().contentEquals(email)).findFirst();
+		if (foundedServiceReceiver.isPresent())
 			return foundedServiceReceiver.get();
-		} else
+		else
 			return null;
+
+	}
+
+	@Override
+	public List<ServiceReceiver> getAllAccounts() {
+
+		return serviceReceivers;
 	}
 
 }
