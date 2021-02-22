@@ -2,7 +2,6 @@ package com.nagarro.serviceReceiver.model;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import lombok.Getter;
@@ -24,9 +23,10 @@ public class ServiceReceiver {
 	@NotEmpty(message = "TelephoneNo is Mandatory")
 	@Size(min = 10, max = 15, message = "Telephone Number should be in range of 10 to 15 Digits")
 	String telePhone;
-	@NotEmpty(message = "Address1 is Mandatory")
-	String address1;
-	String address2;
+	@NotEmpty(message = "Address is Mandatory")
+	String address;
+	@NotEmpty(message = "District is Mandatory")
+	String district;
 	@NotEmpty(message = "City is Mandatory")
 	String city;
 	@NotEmpty(message = "State is Mandatory")
@@ -38,10 +38,4 @@ public class ServiceReceiver {
 	@NotEmpty
 	@Size(min = 8, message = "Password Should be atleast 8 digits")
 	String password;
-
-	public String toString() {
-		return this.firstName + " " + this.lastName + " " + this.title + " " + this.email + " " + this.telePhone + " "
-				+ this.address1 + " " + this.address2 + " " + this.city + " " + this.state + " " + this.zip + " "
-				+ this.country + " " + this.password;
-	}
 }

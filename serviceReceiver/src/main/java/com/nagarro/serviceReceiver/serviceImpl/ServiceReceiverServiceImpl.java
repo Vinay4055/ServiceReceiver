@@ -28,8 +28,8 @@ public class ServiceReceiverServiceImpl implements ServiceReceiverService {
 	public Boolean updateAccount(ServiceReceiver serviceReceiver) {
 		ServiceReceiver existingRecord = this.findAccount(serviceReceiver.getEmail());
 		if (existingRecord != null) {
-			existingRecord.setAddress1(serviceReceiver.getAddress1());
-			existingRecord.setAddress2(serviceReceiver.getAddress2());
+			existingRecord.setAddress(serviceReceiver.getAddress());
+			existingRecord.setDistrict(serviceReceiver.getDistrict());
 			existingRecord.setCity(serviceReceiver.getCity());
 			existingRecord.setCountry(serviceReceiver.getCountry());
 			existingRecord.setFirstName(serviceReceiver.getFirstName());
