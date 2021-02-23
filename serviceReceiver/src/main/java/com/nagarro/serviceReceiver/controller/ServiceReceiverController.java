@@ -82,5 +82,19 @@ public class ServiceReceiverController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
 	}
+	@GetMapping("/accountDetail/location/{email}")
+	public ResponseEntity<String> locationOfServiceReceiver(@PathVariable(name="email") String email) {
+		com.nagarro.serviceReceiver.entity.ServiceReceiver serviceReceiverEntity = serviceReceiverService
+				.findAccount(email);
+		if (serviceReceiverEntity != null) {
+			ServiceReceiver serviceReceiver = mapper.convertServiceReceiverEntityToModel(serviceReceiverEntity);
+
+			return new ResponseEntity<String>(serviceReceiver.getDistrict(), HttpStatus.ACCEPTED);
+
+		} else
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+	}
+	
 
 }

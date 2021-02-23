@@ -1,16 +1,22 @@
 package com.nagarro.serviceReceiver.model;
 
-import java.util.Date;
-
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
+import com.nagarro.serviceReceiver.common.ServiceRequestStatus;
+
+import lombok.Getter;
+import lombok.Setter;
+@Getter
+@Setter
 public class ServiceRequest {
-	@NotEmpty(message = "ServiceID is Mandatory")
 	String id;
+	@NotEmpty(message = "ServiceID is Mandatory")
+	String serviceId;
 	@NotEmpty(message = "Service Date is Mandatory")
-	Date date;
-	@NotEmpty(message = "Status is Mandatory")
-	String status;
+	String date;
+	@NotNull(message = "Status is Mandatory")
+	ServiceRequestStatus statusOfRequest;
 	@NotEmpty(message = "Please Enter The email id of user which requested for the service")
-	String requestMadeBy;
+	String emailIdOfServiceReceiver;
 }

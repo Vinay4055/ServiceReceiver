@@ -20,6 +20,7 @@ public class ServiceReceiverServiceImpl implements ServiceReceiverService {
 			serviceReceivers.add(serviceReceiver);
 			return true;
 		} else {
+			
 			return false;
 		}
 	}
@@ -57,7 +58,7 @@ public class ServiceReceiverServiceImpl implements ServiceReceiverService {
 	public ServiceReceiver findAccount(String email) {
 
 		Optional<ServiceReceiver> foundedServiceReceiver = serviceReceivers.stream()
-				.filter(serviceReceiver -> serviceReceiver.getEmail().contentEquals(email)).findFirst();
+				.filter(serviceReceiver -> serviceReceiver.getEmail().equals(email)).findFirst();
 		if (foundedServiceReceiver.isPresent())
 			return foundedServiceReceiver.get();
 		else

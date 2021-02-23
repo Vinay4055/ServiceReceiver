@@ -25,7 +25,7 @@ import com.nagarro.serviceReceiver.service.MaintainServiceRequest;
 public class ServiceRequestController {
 	@Autowired
 	Mapper mapper;
-	//@Autowired
+	@Autowired
 	MaintainServiceRequest maintainServiceRequest;
 	@PostMapping("/")
 	public ResponseEntity<String> createServiceRequest(@RequestBody @Valid ServiceRequest serviceRequest, BindingResult bindingResult) {
