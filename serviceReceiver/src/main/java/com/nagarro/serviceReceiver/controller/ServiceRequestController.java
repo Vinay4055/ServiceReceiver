@@ -1,6 +1,7 @@
 package com.nagarro.serviceReceiver.controller;
 
 import javax.validation.Valid;
+import javax.ws.rs.Path;
 
 //import javax.validation.Valid;
 
@@ -27,28 +28,33 @@ public class ServiceRequestController {
 	Mapper mapper;
 	@Autowired
 	MaintainServiceRequest maintainServiceRequest;
+
 	@PostMapping("/")
-	public ResponseEntity<String> createServiceRequest(@RequestBody @Valid ServiceRequest serviceRequest, BindingResult bindingResult) {
+	public ResponseEntity<String> createServiceRequest(@RequestBody @Valid ServiceRequest serviceRequest,
+			BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
 			return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
 		} else {
-			String orderId = maintainServiceRequest.bookService(serviceRequest);
-			return	new ResponseEntity<>(orderId,HttpStatus.ACCEPTED);
+			String orderId = maintainServiceRequest.bookService(serviceRequest);// orderId and requestId is same
+			return new ResponseEntity<>(orderId, HttpStatus.ACCEPTED);
 		}
 	}
+
 	@DeleteMapping("/")
-	public ResponseEntity<Void> deleteServiceRequest(@RequestBody @Valid ServiceRequest serviceRequest, BindingResult bindingResult){
-		if (bindingResult.hasErrors()) {
-			return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
-		} else {
-			maintainServiceRequest.cancelService(serviceRequest);
-			return	new ResponseEntity<>(HttpStatus.ACCEPTED);
-		}
+	public ResponseEntity<Void> cancelServiceRequest(@PathVariable(name = "serviceRequestId") String serviceRequestId) {
+
+		maintainServiceRequest.cancelService(serviceRequestId);
+		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
-	@GetMapping("/")
-	public ResponseEntity<ServiceRequest> getServiceStatus(@PathVariable("orderId") String orderId){
+
+	@GetMapping("/{orderId}")
+	public ResponseEntity<ServiceRequest> getServiceStatus(@PathVariable(name = "orderId") String orderId) {
+		System.out.println("Inside Status");
 		ServiceRequest serviceRequest = maintainServiceRequest.statusOfService(orderId);
-		return	new ResponseEntity<>(serviceRequest,HttpStatus.ACCEPTED);
+		if (serviceRequest != null)
+			return new ResponseEntity<ServiceRequest>(serviceRequest, HttpStatus.FOUND);
+		else
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
-	
+
 }
