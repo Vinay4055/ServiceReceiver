@@ -21,9 +21,8 @@ public class MaintainServiceRequestImpl implements MaintainServiceRequest {
 	}
 
 	@Override
-	public Boolean cancelService(String serviceRequestId) {
-
-		return null;
+	public void cancelService(String serviceRequestId) {
+		 serviceReceiverDelegate.callManageServiceRequestAndCancelServiceRequest(serviceRequestId);
 	}
 
 	@Override

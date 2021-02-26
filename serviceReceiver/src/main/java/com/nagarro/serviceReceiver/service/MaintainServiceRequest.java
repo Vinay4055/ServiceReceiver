@@ -6,6 +6,6 @@ import com.nagarro.serviceReceiver.model.ServiceRequest;
 @Service
 public interface MaintainServiceRequest {
 	public String bookService(ServiceRequest serviceRequest);
-	public Boolean cancelService(String serviceRequestId);
+	public void cancelService(String serviceRequestId);
 	public ServiceRequest statusOfService(String orderId);
 }
