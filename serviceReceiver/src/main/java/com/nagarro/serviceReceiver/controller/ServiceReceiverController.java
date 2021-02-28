@@ -34,9 +34,6 @@ public class ServiceReceiverController {
 	public ResponseEntity<Void> addUser(@RequestBody @Valid ServiceReceiver serviceReceiver,
 			BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
-			System.out.println(bindingResult.getAllErrors());
-			System.out.println("Error");
-			System.out.println(serviceReceiver);
 			return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
 		} else if (serviceReceiverService.createAccount(mapper.convertServiceReceiverModelToEntity(serviceReceiver))) {
 

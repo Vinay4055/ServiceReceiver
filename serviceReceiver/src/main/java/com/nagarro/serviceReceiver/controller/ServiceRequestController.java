@@ -37,13 +37,16 @@ public class ServiceRequestController {
 			return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
 		} else {
 			String orderId = maintainServiceRequest.bookService(serviceRequest);// orderId and requestId is same
-			return new ResponseEntity<>(orderId, HttpStatus.ACCEPTED);
+			if (orderId != null)
+				return new ResponseEntity<>(orderId, HttpStatus.ACCEPTED);
+			else
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
 
 	@PutMapping("/{serviceRequestId}")
 	public ResponseEntity<Void> cancelServiceRequest(@PathVariable(name = "serviceRequestId") String serviceRequestId) {
-
+		
 		maintainServiceRequest.cancelService(serviceRequestId);
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}

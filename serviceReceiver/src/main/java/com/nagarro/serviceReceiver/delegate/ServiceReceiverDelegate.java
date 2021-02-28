@@ -66,7 +66,7 @@ public class ServiceReceiverDelegate {
 		Map<String, String> params = new HashMap<>();
 		params.put("serviceRequestId", serviceRequestId);
 
-		restTemplate.put(callUrl + "cancelServiceRequest/{serviceRequestId}", null, params);
+		restTemplate.put(callUrl, null, params);
 
 	}
 
